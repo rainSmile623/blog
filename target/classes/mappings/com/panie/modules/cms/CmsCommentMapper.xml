@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.panie.modules.cms.dao.CmsCommentMapper" >
+  <resultMap id="BaseResultMap" type="com.panie.modules.cms.entity.CmsComment" >
+    <id column="comment_id" property="commentId" jdbcType="INTEGER" />
+    <result column="comment_title" property="commentTitle" jdbcType="VARCHAR" />
+    <result column="comment_content" property="commentContent" jdbcType="VARCHAR" />
+    <result column="comment_name" property="commentName" jdbcType="VARCHAR" />
+    <result column="comment_ip" property="commentIp" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    comment_id, category_id as "category.categoryId" , content_id as "articleData.contentId", comment_title, comment_content, comment_name, 
+    comment_ip, create_date
+  </sql>
+  
+  <select id="get" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cms_comment
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from cms_comment
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.panie.modules.cms.entity.CmsComment" >
+    insert into cms_comment (comment_id, category_id, content_id, 
+      comment_title, comment_content, comment_name, 
+      comment_ip, create_date)
+    values (#{commentId,jdbcType=INTEGER}, #{category.categoryId,jdbcType=VARCHAR}, #{articleData.contentId,jdbcType=VARCHAR}, 
+      #{commentTitle,jdbcType=VARCHAR}, #{commentContent,jdbcType=VARCHAR}, #{commentName,jdbcType=VARCHAR}, 
+      #{commentIp,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.panie.modules.cms.entity.CmsComment" >
+    insert into cms_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commentId != null" >
+        comment_id,
+      </if>
+      <if test="category.categoryId != null" >
+        category_id,
+      </if>
+      <if test="articleData.contentId != null" >
+        content_id,
+      </if>
+      <if test="commentTitle != null" >
+        comment_title,
+      </if>
+      <if test="commentContent != null" >
+        comment_content,
+      </if>
+      <if test="commentName != null" >
+        comment_name,
+      </if>
+      <if test="commentIp != null" >
+        comment_ip,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commentId != null" >
+        #{commentId,jdbcType=INTEGER},
+      </if>
+      <if test="category.categoryId != null" >
+        #{category.categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="articleData.contentId != null" >
+        #{articleData.contentId,jdbcType=VARCHAR},
+      </if>
+      <if test="commentTitle != null" >
+        #{commentTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="commentContent != null" >
+        #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="commentName != null" >
+        #{commentName,jdbcType=VARCHAR},
+      </if>
+      <if test="commentIp != null" >
+        #{commentIp,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateSelective" parameterType="com.panie.modules.cms.entity.CmsComment" >
+    update cms_comment
+    <set >
+      <if test="category.categoryId != null" >
+        category_id = #{category.categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="articleData.contentId != null" >
+        content_id = #{articleData.contentId,jdbcType=VARCHAR},
+      </if>
+      <if test="commentTitle != null" >
+        comment_title = #{commentTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="commentContent != null" >
+        comment_content = #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="commentName != null" >
+        comment_name = #{commentName,jdbcType=VARCHAR},
+      </if>
+      <if test="commentIp != null" >
+        comment_ip = #{commentIp,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+  
+  <update id="update" parameterType="com.panie.modules.cms.entity.CmsComment" >
+    update cms_comment
+    set category_id = #{category.categoryId,jdbcType=VARCHAR},
+      content_id = #{articleData.contentId,jdbcType=VARCHAR},
+      comment_title = #{commentTitle,jdbcType=VARCHAR},
+      comment_content = #{commentContent,jdbcType=VARCHAR},
+      comment_name = #{commentName,jdbcType=VARCHAR},
+      comment_ip = #{commentIp,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+  
+</mapper>

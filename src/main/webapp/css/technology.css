@@ -1,0 +1,17 @@
+
+.list {padding:0px 30px 10px 30px ;position: relative;border-bottom: #ccc 1px solid;overflow: hidden;margin: 20px;  }
+.list ul{float: right; line-height: 22px;  }
+article{ float: left; }
+.list h3{font-size: 14px;font-weight: bold;margin-bottom: 10px;}
+.list a {color: #181818;}
+.list a:hover{text-decoration: underline;}
+.list p{color: #666;font: normal 14px/24px Arial;}
+.author {overflow: hidden;clear:both;margin: 10px 0;display: inline-block;color: #838383;width: 100%;}
+.author span{margin: 0 10px 0 0;padding-left: 20px;}
+.author span a{color:#756b08;}
+.author span a:hover{text-decoration: underline;}
+.lm {background: url("../images/newsbg01.png") no-repeat left center;}
+.dtime { background: url("../images/newsbg02.png") no-repeat left center;}
+.viewnum { background: url("../images/newsbg04.png") no-repeat left center;}
+.pingl { background: url("../images/newsbg03.png") no-repeat left center;}
+.clear { clear: both; }

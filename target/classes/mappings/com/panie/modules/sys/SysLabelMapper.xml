@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.panie.modules.sys.dao.SysLabelMapper" >
+	<resultMap id="BaseResultMap" type="com.panie.modules.sys.entity.SysLabel" >
+		<id column="label_id" property="labelId" jdbcType="INTEGER" />
+		<result column="label_name" property="labelName" jdbcType="VARCHAR" />
+		<result column="label_sort" property="labelSort" jdbcType="INTEGER" />
+		<result column="label_color" property="labelColor" jdbcType="VARCHAR" />
+		<result column="is_show" property="isShow" jdbcType="CHAR" />
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+		<result column="remarks" property="remarks" jdbcType="VARCHAR" />
+	</resultMap
+  >
+	<sql id="Base_Column_List" >
+    label_id, 
+    label_name, 
+    label_sort, 
+    label_color, 
+    is_show, 
+    create_by as "createBy.userId", 
+    create_date, 
+    update_by as "updateBy.userId", 
+    update_date, 
+    remarks
+	</sql>
+  
+	<select id="get" resultMap="BaseResultMap">
+    select 
+		<include refid="Base_Column_List" />
+    from sys_label
+    where label_id = #{labelId,jdbcType=INTEGER}
+	</select>
+  
+	<delete id="delete" parameterType="java.lang.Integer" >
+    delete from sys_label
+    where label_id = #{labelId,jdbcType=INTEGER}
+	</delete>
+  
+	<insert id="insert" parameterType="com.panie.modules.sys.entity.SysLabel" >
+    insert into sys_label (label_id, label_name, label_sort, 
+      label_color, is_show, create_by, 
+      create_date, update_by, update_date, 
+      remarks)
+    values (#{labelId,jdbcType=INTEGER}, #{labelName,jdbcType=VARCHAR}, #{labelSort,jdbcType=INTEGER}, 
+      #{labelColor,jdbcType=VARCHAR}, #{isShow,jdbcType=CHAR}, #{createBy.userId,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateBy.userId,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{remarks,jdbcType=VARCHAR})
+	</insert>
+  
+	<insert id="insertSelective" parameterType="com.panie.modules.sys.entity.SysLabel" >
+    insert into sys_label
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="labelId != null" >
+        label_id,
+			</if>
+			<if test="labelName != null" >
+        label_name,
+			</if>
+			<if test="labelSort != null" >
+        label_sort,
+			</if>
+			<if test="labelColor != null" >
+        label_color,
+			</if>
+			<if test="isShow != null" >
+        is_show,
+			</if>
+			<if test="createBy != null and createBy.userId != null" >
+        create_by,
+			</if>
+			<if test="createDate != null" >
+        create_date,
+			</if>
+			<if test="updateBy != null  and updateBy != null" >
+        update_by,
+			</if>
+			<if test="updateDate != null" >
+        update_date,
+			</if>
+			<if test="remarks != null" >
+        remarks,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="labelId != null" >
+        #{labelId,jdbcType=INTEGER},
+			</if>
+			<if test="labelName != null" >
+        #{labelName,jdbcType=VARCHAR},
+			</if>
+			<if test="labelSort != null" >
+        #{labelSort,jdbcType=INTEGER},
+			</if>
+			<if test="labelColor != null" >
+        #{labelColor,jdbcType=VARCHAR},
+			</if>
+			<if test="isShow != null" >
+        #{isShow,jdbcType=CHAR},
+			</if>
+			<if test="createBy != null and createBy.userId != null" >
+        #{createBy.userId,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null  and updateBy.userId != null" >
+        #{updateBy.userId,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+  
+	<update id="updateSelective" parameterType="com.panie.modules.sys.entity.SysLabel" >
+    update sys_label
+		<set >
+			<if test="labelName != null" >
+        label_name = #{labelName,jdbcType=VARCHAR},
+			</if>
+			<if test="labelSort != null" >
+        label_sort = #{labelSort,jdbcType=INTEGER},
+			</if>
+			<if test="labelColor != null" >
+        label_color = #{labelColor,jdbcType=VARCHAR},
+			</if>
+			<if test="isShow != null" >
+        is_show = #{isShow,jdbcType=CHAR},
+			</if>
+			<if test="createBy != null and createBy.userId != null" >
+        create_by = #{createBy.userId,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy.userId != null" >
+        update_by = #{updateBy.userId,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+			</if>
+		</set>
+    where label_id = #{labelId,jdbcType=INTEGER}
+	</update>
+  
+	<update id="update" parameterType="com.panie.modules.sys.entity.SysLabel" >
+    update sys_label
+    set label_name = #{labelName,jdbcType=VARCHAR},
+      label_sort = #{labelSort,jdbcType=INTEGER},
+      label_color = #{labelColor,jdbcType=VARCHAR},
+      is_show = #{isShow,jdbcType=CHAR},
+      create_by = #{createBy.userId,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy.userId,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where label_id = #{labelId,jdbcType=INTEGER}
+	</update>
+</mapper>

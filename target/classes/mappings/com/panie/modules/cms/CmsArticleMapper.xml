@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.panie.modules.cms.dao.CmsArticleMapper" >
+  <resultMap id="BaseResultMap" type="com.panie.modules.cms.entity.CmsArticle" >
+    <id column="article_id" property="articleId" jdbcType="INTEGER" />
+    <result column="article_title" property="articleTitle" jdbcType="VARCHAR" />
+    <result column="article_link" property="articleLink" jdbcType="VARCHAR" />
+    <result column="article_color" property="articleColor" jdbcType="VARCHAR" />
+    <result column="article_image" property="articleImage" jdbcType="VARCHAR" />
+    <result column="article_keywords" property="articleKeywords" jdbcType="VARCHAR" />
+    <result column="article_desc" property="articleDesc" jdbcType="VARCHAR" />
+    <result column="article_weight" property="articleWeight" jdbcType="INTEGER" />
+    <result column="article_weight_date" property="articleWeightDate" jdbcType="TIMESTAMP" />
+    <result column="comments" property="comments" jdbcType="INTEGER" />
+    <result column="hits" property="hits" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    article_id, 
+    category_id as "category.categoryId", 
+    article_title, 
+    article_link, 
+    article_color, 
+    article_image, 
+    article_keywords, 
+    article_desc, 
+    article_weight, 
+    article_weight_date, 
+    comments, 
+    hits, 
+    create_by as "createBy.userId", 
+    create_date, 
+    update_by as "updateBy.userId", 
+    update_date, 
+    remarks
+  </sql>
+  
+  <select id="get" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cms_article
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from cms_article
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.panie.modules.cms.entity.CmsArticle" >
+    insert into cms_article (article_id, category_id, article_title, 
+      article_link, article_color, article_image, 
+      article_keywords, article_desc, article_weight, 
+      article_weight_date, comments, hits, 
+      create_by, create_date, update_by, 
+      update_date, remarks)
+    values (#{articleId,jdbcType=INTEGER}, #{category.categoryId,jdbcType=VARCHAR}, #{articleTitle,jdbcType=VARCHAR}, 
+      #{articleLink,jdbcType=VARCHAR}, #{articleColor,jdbcType=VARCHAR}, #{articleImage,jdbcType=VARCHAR}, 
+      #{articleKeywords,jdbcType=VARCHAR}, #{articleDesc,jdbcType=VARCHAR}, #{articleWeight,jdbcType=INTEGER}, 
+      #{articleWeightDate,jdbcType=TIMESTAMP}, #{comments,jdbcType=INTEGER}, #{hits,jdbcType=INTEGER}, 
+      #{createBy.userId,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateBy.userId,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.panie.modules.cms.entity.CmsArticle" >
+    insert into cms_article
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="articleId != null" >
+        article_id,
+      </if>
+      <if test="category.categoryId != null" >
+        category_id,
+      </if>
+      <if test="articleTitle != null" >
+        article_title,
+      </if>
+      <if test="articleLink != null" >
+        article_link,
+      </if>
+      <if test="articleColor != null" >
+        article_color,
+      </if>
+      <if test="articleImage != null" >
+        article_image,
+      </if>
+      <if test="articleKeywords != null" >
+        article_keywords,
+      </if>
+      <if test="articleDesc != null" >
+        article_desc,
+      </if>
+      <if test="articleWeight != null" >
+        article_weight,
+      </if>
+      <if test="articleWeightDate != null" >
+        article_weight_date,
+      </if>
+      <if test="comments != null" >
+        comments,
+      </if>
+      <if test="hits != null" >
+        hits,
+      </if>
+      <if test="createBy.userId != null" >
+        create_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateBy.userId != null" >
+        update_by,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="articleId != null" >
+        #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="category.categoryId != null" >
+        #{category.categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTitle != null" >
+        #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleLink != null" >
+        #{articleLink,jdbcType=VARCHAR},
+      </if>
+      <if test="articleColor != null" >
+        #{articleColor,jdbcType=VARCHAR},
+      </if>
+      <if test="articleImage != null" >
+        #{articleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="articleKeywords != null" >
+        #{articleKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="articleDesc != null" >
+        #{articleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="articleWeight != null" >
+        #{articleWeight,jdbcType=INTEGER},
+      </if>
+      <if test="articleWeightDate != null" >
+        #{articleWeightDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comments != null" >
+        #{comments,jdbcType=INTEGER},
+      </if>
+      <if test="hits != null" >
+        #{hits,jdbcType=INTEGER},
+      </if>
+      <if test="createBy.userId != null" >
+        #{createBy.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy.userId != null" >
+        #{updateBy.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateSelective" parameterType="com.panie.modules.cms.entity.CmsArticle" >
+    update cms_article
+    <set >
+      <if test="category.categoryId != null" >
+        category_id = #{category.categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTitle != null" >
+        article_title = #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleLink != null" >
+        article_link = #{articleLink,jdbcType=VARCHAR},
+      </if>
+      <if test="articleColor != null" >
+        article_color = #{articleColor,jdbcType=VARCHAR},
+      </if>
+      <if test="articleImage != null" >
+        article_image = #{articleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="articleKeywords != null" >
+        article_keywords = #{articleKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="articleDesc != null" >
+        article_desc = #{articleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="articleWeight != null" >
+        article_weight = #{articleWeight,jdbcType=INTEGER},
+      </if>
+      <if test="articleWeightDate != null" >
+        article_weight_date = #{articleWeightDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comments != null" >
+        comments = #{comments,jdbcType=INTEGER},
+      </if>
+      <if test="hits != null" >
+        hits = #{hits,jdbcType=INTEGER},
+      </if>
+      <if test="createBy.userId != null" >
+        create_by = #{createBy.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy.userId != null" >
+        update_by = #{updateBy.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </update>
+  
+  <update id="update" parameterType="com.panie.modules.cms.entity.CmsArticle" >
+    update cms_article
+    set category_id = #{category.categoryId,jdbcType=VARCHAR},
+      article_title = #{articleTitle,jdbcType=VARCHAR},
+      article_link = #{articleLink,jdbcType=VARCHAR},
+      article_color = #{articleColor,jdbcType=VARCHAR},
+      article_image = #{articleImage,jdbcType=VARCHAR},
+      article_keywords = #{articleKeywords,jdbcType=VARCHAR},
+      article_desc = #{articleDesc,jdbcType=VARCHAR},
+      article_weight = #{articleWeight,jdbcType=INTEGER},
+      article_weight_date = #{articleWeightDate,jdbcType=TIMESTAMP},
+      comments = #{comments,jdbcType=INTEGER},
+      hits = #{hits,jdbcType=INTEGER},
+      create_by = #{createBy.userId,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy.userId,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </update>
+</mapper>

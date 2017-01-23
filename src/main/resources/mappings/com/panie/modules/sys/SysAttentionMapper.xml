@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.panie.modules.sys.dao.SysAttentionMapper" >
+  <resultMap id="BaseResultMap" type="com.panie.modules.sys.entity.SysAttention" >
+    <id column="attention_id" property="attentionId" jdbcType="INTEGER" />
+    <result column="attention_name" property="attentionName" jdbcType="VARCHAR" />
+    <result column="attention_href" property="attentionHref" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    attention_id, 
+    attention_name, 
+    attention_href, 
+    create_by as "createBy.userId", 
+    create_date, 
+    update_by as "updateBy.userId", 
+    update_date, 
+    remarks
+  </sql>
+  
+  <select id="get" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_attention
+    where attention_id = #{attentionId,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from sys_attention
+    where attention_id = #{attentionId,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.panie.modules.sys.entity.SysAttention" >
+    insert into sys_attention (attention_id, attention_name, attention_href, 
+      create_by, create_date, update_by, 
+      update_date, remarks)
+    values (#{attentionId,jdbcType=INTEGER}, #{attentionName,jdbcType=VARCHAR}, #{attentionHref,jdbcType=VARCHAR}, 
+      #{createBy.userId,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateBy.userId,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.panie.modules.sys.entity.SysAttention" >
+    insert into sys_attention
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="attentionId != null" >
+        attention_id,
+      </if>
+      <if test="attentionName != null" >
+        attention_name,
+      </if>
+      <if test="attentionHref != null" >
+        attention_href,
+      </if>
+      <if test="createBy != null and createBy.userId != null" >
+        create_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateBy != null and updateBy.userId != null" >
+        update_by,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="attentionId != null" >
+        #{attentionId,jdbcType=INTEGER},
+      </if>
+      <if test="attentionName != null" >
+        #{attentionName,jdbcType=VARCHAR},
+      </if>
+      <if test="attentionHref != null" >
+        #{attentionHref,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null and createBy.userId != null" >
+        #{createBy.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+       <if test="updateBy != null and updateBy.userId != null" >
+        #{updateBy.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateSelective" parameterType="com.panie.modules.sys.entity.SysAttention" >
+    update sys_attention
+    <set >
+      <if test="attentionName != null" >
+        attention_name = #{attentionName,jdbcType=VARCHAR},
+      </if>
+      <if test="attentionHref != null" >
+        attention_href = #{attentionHref,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null and createBy.userId != null" >
+        create_by = #{createBy.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+       <if test="updateBy != null and updateBy.userId != null" >
+        update_by = #{updateBy.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where attention_id = #{attentionId,jdbcType=INTEGER}
+  </update>
+  
+  <update id="update" parameterType="com.panie.modules.sys.entity.SysAttention" >
+    update sys_attention
+    set attention_name = #{attentionName,jdbcType=VARCHAR},
+      attention_href = #{attentionHref,jdbcType=VARCHAR},
+      create_by = #{createBy.userId,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy.userId,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where attention_id = #{attentionId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.panie.modules.cms.dao.CmsArticleDataMapper" >
+	<resultMap id="BaseResultMap" type="com.panie.modules.cms.entity.CmsArticleData" >
+		<id column="content_id" property="contentId" jdbcType="INTEGER" />
+		<result column="content_copyfrom" property="contentCopyfrom" jdbcType="VARCHAR" />
+		<result column="content_relation" property="contentRelation" jdbcType="VARCHAR" />
+		<result column="allow_comment" property="allowComment" jdbcType="CHAR" />
+	</resultMap>
+	
+	<resultMap id="ResultMapWithBLOBs" type="com.panie.modules.cms.entity.CmsArticleData" extends="BaseResultMap" >
+		<result column="content_data" property="contentData" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	
+	<sql id="Base_Column_List" >
+    content_id, 
+    article_id as "article.articleId", 
+    content_copyfrom, 
+    content_relation, 
+    allow_comment
+	</sql>
+	
+	<sql id="Blob_Column_List" >
+    content_data
+	</sql>
+	
+	<select id="get" resultMap="ResultMapWithBLOBs">
+    select 
+		<include refid="Base_Column_List" />
+    ,
+		<include refid="Blob_Column_List" />
+    from cms_article_data
+    where content_id = #{contentId,jdbcType=INTEGER}
+	</select>
+	
+	<delete id="delete" parameterType="java.lang.Integer" >
+    delete from cms_article_data
+    where content_id = #{contentId,jdbcType=INTEGER}
+	</delete>
+	
+	<insert id="insert" parameterType="com.panie.modules.cms.entity.CmsArticleData" >
+    insert into cms_article_data (content_id, article_id, content_copyfrom, 
+      content_relation, allow_comment, content_data
+      )
+    values (#{contentId,jdbcType=INTEGER}, #{article.articleId,jdbcType=INTEGER}, #{contentCopyfrom,jdbcType=VARCHAR}, 
+      #{contentRelation,jdbcType=VARCHAR}, #{allowComment,jdbcType=CHAR}, #{contentData,jdbcType=LONGVARCHAR}
+      )
+	</insert>
+	
+	<insert id="insertSelective" parameterType="com.panie.modules.cms.entity.CmsArticleData" >
+    insert into cms_article_data
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="contentId != null" >
+        content_id,
+			</if>
+			<if test="article.articleId != null" >
+        article_id,
+			</if>
+			<if test="contentCopyfrom != null" >
+        content_copyfrom,
+			</if>
+			<if test="contentRelation != null" >
+        content_relation,
+			</if>
+			<if test="allowComment != null" >
+        allow_comment,
+			</if>
+			<if test="contentData != null" >
+        content_data,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="contentId != null" >
+        #{contentId,jdbcType=INTEGER},
+			</if>
+			<if test="article.articleId != null" >
+        #{article.articleId,jdbcType=INTEGER},
+			</if>
+			<if test="contentCopyfrom != null" >
+        #{contentCopyfrom,jdbcType=VARCHAR},
+			</if>
+			<if test="contentRelation != null" >
+        #{contentRelation,jdbcType=VARCHAR},
+			</if>
+			<if test="allowComment != null" >
+        #{allowComment,jdbcType=CHAR},
+			</if>
+			<if test="contentData != null" >
+        #{contentData,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	
+	<update id="updateSelective" parameterType="com.panie.modules.cms.entity.CmsArticleData" >
+    update cms_article_data
+		<set >
+			<if test="article.articleId != null" >
+        article_id = #{article.articleId,jdbcType=INTEGER},
+			</if>
+			<if test="contentCopyfrom != null" >
+        content_copyfrom = #{contentCopyfrom,jdbcType=VARCHAR},
+			</if>
+			<if test="contentRelation != null" >
+        content_relation = #{contentRelation,jdbcType=VARCHAR},
+			</if>
+			<if test="allowComment != null" >
+        allow_comment = #{allowComment,jdbcType=CHAR},
+			</if>
+			<if test="contentData != null" >
+        content_data = #{contentData,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+    where content_id = #{contentId,jdbcType=INTEGER}
+	</update>
+	
+	<update id="updateWithBLOBs" parameterType="com.panie.modules.cms.entity.CmsArticleData" >
+    update cms_article_data
+    set article_id = #{article.articleId,jdbcType=INTEGER},
+      content_copyfrom = #{contentCopyfrom,jdbcType=VARCHAR},
+      content_relation = #{contentRelation,jdbcType=VARCHAR},
+      allow_comment = #{allowComment,jdbcType=CHAR},
+      content_data = #{contentData,jdbcType=LONGVARCHAR}
+    where content_id = #{contentId,jdbcType=INTEGER}
+	</update>
+	
+	<update id="update" parameterType="com.panie.modules.cms.entity.CmsArticleData" >
+    update cms_article_data
+    set article_id = #{article.articleId,jdbcType=INTEGER},
+      content_copyfrom = #{contentCopyfrom,jdbcType=VARCHAR},
+      content_relation = #{contentRelation,jdbcType=VARCHAR},
+      allow_comment = #{allowComment,jdbcType=CHAR}
+    where content_id = #{contentId,jdbcType=INTEGER}
+	</update>
+</mapper>

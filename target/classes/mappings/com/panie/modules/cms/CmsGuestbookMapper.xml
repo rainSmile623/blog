@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.panie.modules.cms.dao.CmsGuestbookMapper" >
+  <resultMap id="BaseResultMap" type="com.panie.modules.cms.entity.CmsGuestbook" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="workunit" property="workunit" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="re_user_id" property="reUserId" jdbcType="VARCHAR" />
+    <result column="re_date" property="reDate" jdbcType="TIMESTAMP" />
+    <result column="re_content" property="reContent" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, type, content, name, email, phone, workunit, ip, create_date, re_user_id, re_date, 
+    re_content
+  </sql>
+  
+  <select id="get" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cms_guestbook
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from cms_guestbook
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.panie.modules.cms.entity.CmsGuestbook" >
+    insert into cms_guestbook (id, type, content, 
+      name, email, phone, 
+      workunit, ip, create_date, 
+      re_user_id, re_date, re_content
+      )
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=CHAR}, #{content,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{workunit,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{reUserId,jdbcType=VARCHAR}, #{reDate,jdbcType=TIMESTAMP}, #{reContent,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.panie.modules.cms.entity.CmsGuestbook" >
+    insert into cms_guestbook
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="workunit != null" >
+        workunit,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="reUserId != null" >
+        re_user_id,
+      </if>
+      <if test="reDate != null" >
+        re_date,
+      </if>
+      <if test="reContent != null" >
+        re_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="workunit != null" >
+        #{workunit,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reUserId != null" >
+        #{reUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="reDate != null" >
+        #{reDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reContent != null" >
+        #{reContent,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateSelective" parameterType="com.panie.modules.cms.entity.CmsGuestbook" >
+    update cms_guestbook
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="workunit != null" >
+        workunit = #{workunit,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reUserId != null" >
+        re_user_id = #{reUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="reDate != null" >
+        re_date = #{reDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reContent != null" >
+        re_content = #{reContent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="update" parameterType="com.panie.modules.cms.entity.CmsGuestbook" >
+    update cms_guestbook
+    set type = #{type,jdbcType=CHAR},
+      content = #{content,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      workunit = #{workunit,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      re_user_id = #{reUserId,jdbcType=VARCHAR},
+      re_date = #{reDate,jdbcType=TIMESTAMP},
+      re_content = #{reContent,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
