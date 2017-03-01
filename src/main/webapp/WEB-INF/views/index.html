@@ -28,14 +28,12 @@
 				<p></p>
 				<p></p>
 			</div>
-			<div class="blog_list">
+			 <div class="blog_list">
 				<h2>
-					<p>
-						<spa>文章</spa>
-						推荐
-					</p>
+					<p><span>文章</span>推荐</p>
 				</h2>
-				<div class="blogs">
+				<div id="all_blogs">
+					<!-- <div class="blogs">
 					<figure>
 						<img src="images/01.jpg">
 					</figure>
@@ -47,11 +45,10 @@
 							渐渐地，它停了下来，也许是太累，也许是要积蓄力量！
 							不时地，它发出一声声鸣叫，是在向同伴寻求帮助？还是在为自己呐喊？也许它是感到了一丝绝望？</p>
 						<p class="author">
-							<span class="lm f_l"><a href="/">个人博客</a></span> <span
-								class="dtime f_l">2014-02-19</span> <span class="viewnum f_r">浏览（<a
-								href="/">459</a>）
-							</span> <span class="pingl f_r">评论（<a href="/">30</a>）
-							</span>
+							<span class="lm f_l"><a href="/">个人博客</a></span> 
+							<span class="dtime f_l">2014-02-19</span> 
+							<span class="viewnum f_r">浏览（<a href="/">459</a>）</span> 
+							<span class="pingl f_r">评论（<a href="/">30</a>）</span>
 						</p>
 					</ul>
 				</div>
@@ -134,6 +131,7 @@
 							</span>
 						</p>
 					</ul>
+				</div>  -->
 				</div>
 			</div>
 		</div>
@@ -220,7 +218,10 @@
 		</div>
 		<div class="clear"></div>
 	</div>
+	<script src="js/jquery.js"></script>
 	<script src="js/silder.js"></script>
+	<script src="js/page/index.js"></script>
+	
 	<script>
 		window.onload = function() {
 			var oLi = document.getElementById("tab").getElementsByTagName("li");
