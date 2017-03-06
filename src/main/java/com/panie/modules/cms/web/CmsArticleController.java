@@ -25,6 +25,7 @@ public class CmsArticleController extends BaseController<CmsArticle>
     {
         List<CmsArticle> list = cmsArticleService.findList(article);
         
+        
         return list;
     }
 }

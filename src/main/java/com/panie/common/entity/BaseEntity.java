@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.panie.modules.sys.entity.SysUser;
 import com.panie.modules.sys.utils.UserUtils;
 
@@ -19,17 +20,20 @@ public abstract class BaseEntity<T> implements Serializable
     /**
      * 实体编号（唯一标识）
      */
+    @JsonIgnore
     protected Serializable id;
     
     /**
      * 当前用户
      */
+    @JsonIgnore
     protected SysUser currentUser;
     
     /**
      * 是否是新记录（默认：false），调用setIsNewRecord()设置新记录，使用自定义ID。
      * 设置为true后强制执行插入语句，ID不会自动生成，需从手动传入。
      */
+    @JsonIgnore
     protected boolean isNewRecord = false;
     
     public BaseEntity()

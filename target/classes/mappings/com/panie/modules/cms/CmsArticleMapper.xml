@@ -45,6 +45,12 @@
     where article_id = #{articleId,jdbcType=INTEGER}
   </select>
   
+  <select id="findList" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cms_article
+  </select>
+  
   <delete id="delete" parameterType="java.lang.Integer" >
     delete from cms_article
     where article_id = #{articleId,jdbcType=INTEGER}

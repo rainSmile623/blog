@@ -2,6 +2,7 @@ package com.panie.common.entity;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.panie.modules.sys.entity.SysUser;
 import com.panie.modules.sys.utils.UserUtils;
 
@@ -13,16 +14,22 @@ public abstract class DataEntity<T> extends BaseEntity<T>
     
     private static final long serialVersionUID = 1L;
     
+    @JsonIgnore
     private SysUser createBy; // 创建人
     
+    @JsonIgnore
     private Date createDate; // 创建时间
     
+    @JsonIgnore
     private SysUser updateBy; // 修改人
     
+    @JsonIgnore
     private Date updateDate; // 修改时间
     
+    @JsonIgnore
     private String remarks; // 备注信息
     
+    @JsonIgnore
     private String delFlag; // 删除标记（0：正常；1：删除；）
     
     public DataEntity()
